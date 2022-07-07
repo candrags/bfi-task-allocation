@@ -35,7 +35,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ env.GIT_REF }}
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.BFI_GH_PAT }}
 
       # With Prefix: npx standard-version --tag-prefix ${{ env.SIT_IMAGE_PREFIX }}
       - name: Set & Tag Version with Changelog

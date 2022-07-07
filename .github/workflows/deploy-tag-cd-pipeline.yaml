@@ -112,7 +112,7 @@ jobs:
           createPR: false
           branch: master
           targetBranch: master
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.BFI_GH_PAT }}
           workDir: app-deployment
 
 

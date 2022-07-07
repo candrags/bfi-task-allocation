@@ -14,7 +14,6 @@ public class RoundRobinActivity implements JavaDelegate {
 
   @Autowired
   private UserCamundaService userService;
-
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     String groupName = (String) execution.getVariable(ActivityConstants.ROUNDROBIN_ASSIGN_TO_GROUP);
