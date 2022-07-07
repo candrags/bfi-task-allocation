@@ -7,19 +7,19 @@ public abstract class SecurityConstants {
     LOGIN,
     RESET_PIN,
     EKYC,
-    SYSTEM_SERVICE
+    SYSTEM_SERVICE,
   }
 
   public enum Platform {
     IOS,
     ANDROID,
-    WEB
+    WEB,
   }
 
   public enum TokenType {
     REFRESH,
     ACCESS,
-    TEMP
+    TEMP,
   }
 
   public static final String TOKEN_TYPE_CLAIM_KEY = "type";

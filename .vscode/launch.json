@@ -8,6 +8,18 @@
             "mainClass": "id.bfi.co.id.App",
             "projectName": "bfi-task-allocation",
             "args": "",
+            "vmArgs":"-Dspring.profiles.active=local-standalone",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-App<bfi-task-allocation>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "id.co.bfi.bfitaskallocation.App",
+            "projectName": "bfi-task-allocation",
+            "args": "",
+            "vmArgs":"-Dspring.profiles.active=local-standalone",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

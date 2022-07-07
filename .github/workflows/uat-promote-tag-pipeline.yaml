@@ -37,7 +37,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          repository: bfi-finance/bfi-app-deployment
+          repository: bfi-finance/app-deployment
           token: ${{ secrets.GH_PAT }}
           path: app-deployment
           fetch-depth: 1
@@ -48,7 +48,7 @@ jobs:
           valueFile: ${{ env.SERVICE_NAME }}/values-uat.yaml
           propertyPath: "*.image.tag"
           value: ${{ env.GIT_TAG }}
-          repository: bfi-finance/bfi-app-deployment
+          repository: bfi-finance/app-deployment
           message: 'chore(deploy): [UAT] Update service (${{ env.SERVICE_NAME }}) image version to (${{ env.GIT_TAG }})'
           createPR: false
           branch: master

@@ -1,18 +1,16 @@
 package id.co.bfi.bfitaskallocation.auth;
 
+import id.co.bfi.bfitaskallocation.constant.SecurityConstants;
 import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import id.co.bfi.bfitaskallocation.constant.SecurityConstants;
-
 public class AuthenticationFilter extends OncePerRequestFilter {
+
   private SecurityContextService authenticationService;
 
   public AuthenticationFilter(SecurityContextService jwtAuthService) {
@@ -20,20 +18,11 @@ public class AuthenticationFilter extends OncePerRequestFilter {
   }
 
   @Override
-  protected void doFilterInternal(
-    HttpServletRequest request,
-    HttpServletResponse response,
-    FilterChain filterChain
-  )
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
     throws ServletException, IOException {
-    String authenticationHeader = request.getHeader(
-      SecurityConstants.AUTHORIZATION_HEADER_KEY
-    );
+    String authenticationHeader = request.getHeader(SecurityConstants.AUTHORIZATION_HEADER_KEY);
     String apiSecretHeader = request.getHeader(SecurityConstants.API_SECRET_HEADER_KEY);
-    if (
-      authenticationHeader != null &&
-      authenticationHeader.startsWith(SecurityConstants.BEARER_TOKEN_PREFIX)
-    ) {
+    if (authenticationHeader != null && authenticationHeader.startsWith(SecurityConstants.BEARER_TOKEN_PREFIX)) {
       // User token
       SecurityContextHolder
         .getContext()
@@ -53,4 +42,3 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 }
-
