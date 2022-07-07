@@ -34,7 +34,7 @@ jobs:
         uses: snyk/actions/maven@master
         continue-on-error: false
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          BFI_SNYK_TOKEN: ${{ secrets.BFI_SNYK_TOKEN }}
         with:
           args:
             --all-projects
@@ -72,12 +72,12 @@ jobs:
       - name: Verify with SonarQube
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.BFI_SONAR_TOKEN }}
         run: >
           mvn verify sonar:sonar
           -Dsonar.organization=${{ env.SONAR_ORG }}
           -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+          -Dsonar.host.url=${{ secrets.BFI_SONAR_HOST_URL }}
 
 
 # ---------------------------------------
@@ -160,7 +160,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: bfi-finance/bfi-app-deployment
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.BFI_GH_PAT }}
           path: app-deployment
           fetch-depth: 1
 
@@ -184,7 +184,7 @@ jobs:
           createPR: false
           branch: master
           targetBranch: master
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.BFI_GH_PAT }}
           workDir: app-deployment
 
 
