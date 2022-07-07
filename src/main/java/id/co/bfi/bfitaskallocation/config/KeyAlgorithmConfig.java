@@ -1,13 +1,12 @@
 package id.co.bfi.bfitaskallocation.config;
 
+import com.auth0.jwt.algorithms.Algorithm;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-
-import com.auth0.jwt.algorithms.Algorithm;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -17,11 +16,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.util.StringUtils;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 @Configuration
 public class KeyAlgorithmConfig {
+
   @Value("${setting.jwt.jks.filePath}")
   private String filePath;
 
@@ -45,15 +43,10 @@ public class KeyAlgorithmConfig {
     // Load jks file stream
     try (InputStream jskFileStream = new FileInputStream(filePath)) {
       KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-      keyStore.load(
-        jskFileStream,
-        StringUtils.hasText(filePassword) ? null : filePassword.toCharArray()
-      );
+      keyStore.load(jskFileStream, StringUtils.hasText(filePassword) ? null : filePassword.toCharArray());
 
       // Get public key
-      RSAPublicKey publicKey = (RSAPublicKey) keyStore
-        .getCertificate(keyName)
-        .getPublicKey();
+      RSAPublicKey publicKey = (RSAPublicKey) keyStore.getCertificate(keyName).getPublicKey();
 
       // Get private key
       RSAPrivateKey privateKey = (RSAPrivateKey) keyStore.getKey(

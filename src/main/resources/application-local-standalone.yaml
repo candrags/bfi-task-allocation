@@ -1,10 +1,10 @@
 spring:
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://postgres/bfi-task-allocation
+    # platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     driverClassName: org.postgresql.Driver
-    username: bfi-task-allocation
-    password: bfi-task-allocation
+    username: postgres
+    password: postgres
 
 logging:
   level:

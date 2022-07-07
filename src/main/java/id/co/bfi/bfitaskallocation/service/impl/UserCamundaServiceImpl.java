@@ -1,33 +1,39 @@
 package id.co.bfi.bfitaskallocation.service.impl;
 
+import id.co.bfi.bfitaskallocation.service.UserCamundaService;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-
-import id.co.bfi.bfitaskallocation.service.UserCamundaService;
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.springframework.stereotype.Service;
 
 @Slf4j
+@Service
 public class UserCamundaServiceImpl implements UserCamundaService {
+
   private String assignTo;
 
   @Override
   public Integer countUserByGroupName(DelegateExecution execution, String groupName) {
-    return execution.getProcessEngineServices()
-        .getIdentityService()
-        .createGroupQuery()
-        .groupId(groupName)
-        .list()
-        .size();
+    return execution
+      .getProcessEngineServices()
+      .getIdentityService()
+      .createGroupQuery()
+      .groupId(groupName)
+      .list()
+      .size();
   }
 
   @Override
   public String getUserByRoundRobin(DelegateExecution execution, String groupName) {
     List<String> listUserName = new ArrayList<>();
 
-    var usersInGroup = execution.getProcessEngineServices().getIdentityService().createUserQuery()
-        .memberOfGroup(groupName).list();
+    var usersInGroup = execution
+      .getProcessEngineServices()
+      .getIdentityService()
+      .createUserQuery()
+      .memberOfGroup(groupName)
+      .list();
 
     if (usersInGroup.size() > 0) {
       for (int i = 0; i < usersInGroup.size(); i++) {
@@ -55,15 +61,23 @@ public class UserCamundaServiceImpl implements UserCamundaService {
 
         log.debug("Compare: " + participants.get(userIdx) + " and " + listUserName.get(0));
 
-        var countTaskFirst = execution.getProcessEngineServices().getTaskService().createTaskQuery()
-            .taskAssignee(listUserName.get(0))
-            .list().size();
+        var countTaskFirst = execution
+          .getProcessEngineServices()
+          .getTaskService()
+          .createTaskQuery()
+          .taskAssignee(listUserName.get(0))
+          .list()
+          .size();
 
         log.debug(listUserName.get(0) + " HAVE " + countTaskFirst + " TASK ");
 
-        var countTaskSecond = execution.getProcessEngineServices().getTaskService().createTaskQuery()
-            .taskAssignee(participants.get(userIdx))
-            .list().size();
+        var countTaskSecond = execution
+          .getProcessEngineServices()
+          .getTaskService()
+          .createTaskQuery()
+          .taskAssignee(participants.get(userIdx))
+          .list()
+          .size();
 
         log.debug(participants.get(userIdx) + " HAVE " + countTaskSecond + " TASK ");
 
@@ -74,9 +88,7 @@ public class UserCamundaServiceImpl implements UserCamundaService {
           log.debug("Assign: " + participants.get(userIdx));
           assignTo = participants.get(userIdx);
         }
-
       }
-
     }
     return assignTo;
   }
