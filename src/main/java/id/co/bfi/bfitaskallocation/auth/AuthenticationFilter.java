@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import id.co.bfi.bfitaskallocation.constant.SecurityConstants;
+
 public class AuthenticationFilter extends OncePerRequestFilter {
 
   private SecurityContextService authenticationService;

@@ -18,7 +18,6 @@ public class DirectActivity implements JavaDelegate {
 
   @Autowired
   private GroupCamundaService groupService;
-
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     String assignTo = (String) execution.getVariable(ActivityConstants.DIRECT_ASSIGN_TO);

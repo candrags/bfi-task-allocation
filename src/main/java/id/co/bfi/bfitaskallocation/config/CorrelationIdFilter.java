@@ -13,6 +13,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import id.co.bfi.bfitaskallocation.constant.LoggingConstants;
+
 @Component
 public class CorrelationIdFilter extends OncePerRequestFilter {
 
