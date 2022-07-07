@@ -159,7 +159,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: bfi-finance/app-deployment
+          repository: bfi-finance/bfi-app-deployment
           token: ${{ secrets.GH_PAT }}
           path: app-deployment
           fetch-depth: 1
@@ -176,7 +176,7 @@ jobs:
           valueFile: ${{ env.SERVICE_NAME }}/values-dev.yaml
           propertyPath: "*.image.tag"
           value: ${{ env.IMAGE_PREFIX }}-${{ env.TRUNK_VERSION }}-${{ env.TRUNK_SHA }}
-          repository: bfi-finance/app-deployment
+          repository: bfi-finance/bfi-app-deployment
           message: 'chore(deploy): [${{ env.IMAGE_PREFIX }}] Update service (${{ env.SERVICE_NAME }}) image version to (${{ env.IMAGE_PREFIX }}-${{ env.TRUNK_VERSION }}-${{ env.TRUNK_SHA }})'
           # Set this to true to enable PR for version update
           #targetBranch: master
